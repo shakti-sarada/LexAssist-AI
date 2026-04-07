@@ -22,8 +22,24 @@ def get_index(domain):
 # ---------------------------
 # 🔹 Models
 # ---------------------------
-embed_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+# embed_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+# reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+
+embed_model = None
+reranker = None
+
+
+def get_models():
+    global embed_model, reranker
+
+    if embed_model is None:
+        embed_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+
+    if reranker is None:
+        reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+
+    return embed_model, reranker
+
 
 # ---------------------------
 # 🔹 NVIDIA Setup
@@ -101,8 +117,13 @@ def get_top_k(query):
 # ---------------------------
 # 🔹 Retrieval + Reranking
 # ---------------------------
+#
+
 def retrieve_context(query, domain, final_k=3):
     index = get_index(domain)
+
+    # ✅ 🔥 ADD THIS LINE (lazy loading)
+    embed_model, reranker = get_models()
 
     if domain == "cyber" and not is_safe_cyber_query(query):
         return "UNSAFE_QUERY"
