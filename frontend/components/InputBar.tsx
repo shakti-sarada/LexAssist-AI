@@ -34,7 +34,7 @@ export default function InputBar({
     setLoading(true);
 
     try {
-      // ✅ FIXED: use deployed backend URL
+      
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
         method: "POST",
         headers: {
