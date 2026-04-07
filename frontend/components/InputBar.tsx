@@ -34,7 +34,8 @@ export default function InputBar({
     setLoading(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/chat", {
+      // ✅ FIXED: use deployed backend URL
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
