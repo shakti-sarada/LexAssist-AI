@@ -1,5 +1,7 @@
 # ⚖️ Legal AI Assistant (RAG-based)
 
+App Link: https://lex-assist-ai.vercel.app/
+
 An intelligent Legal AI Assistant built using Retrieval-Augmented
 Generation (RAG) that provides legal information across multiple domains
 like Consumer Law, Food Safety, and Cyber Crime.
